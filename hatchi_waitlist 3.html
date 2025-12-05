@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HATCHI - A New Ritual for Digital Connection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #e8f4ff 25%, #fff5e8 50%, #f0e8ff 75%, #e8fff5 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            color: #4a4a5e;
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(255, 70, 160, 0.3), transparent 40%),
+                radial-gradient(ellipse at 70% 40%, rgba(70, 160, 255, 0.3), transparent 40%),
+                radial-gradient(ellipse at 50% 60%, rgba(255, 160, 70, 0.3), transparent 40%),
+                radial-gradient(ellipse at 20% 80%, rgba(70, 255, 180, 0.3), transparent 40%),
+                radial-gradient(ellipse at 80% 70%, rgba(180, 70, 255, 0.3), transparent 40%),
+                radial-gradient(ellipse at 55% 90%, rgba(120, 255, 120, 0.3), transparent 40%);
+            opacity: 0.4;
+            filter: blur(80px);
+            animation: bodySparkle 3s ease-in-out infinite, bodyColorDrift 15s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes bodySparkle {
+            0%, 100% { 
+                filter: blur(80px) brightness(1.2) saturate(1.4);
+                opacity: 0.4;
+            }
+            50% { 
+                filter: blur(70px) brightness(1.4) saturate(1.6);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes bodyColorDrift {
+            0% {
+                background: 
+                    radial-gradient(ellipse at 30% 20%, rgba(255, 70, 160, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 70% 40%, rgba(70, 160, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 50% 60%, rgba(255, 160, 70, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 20% 80%, rgba(70, 255, 180, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 80% 70%, rgba(180, 70, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 55% 90%, rgba(120, 255, 120, 0.3), transparent 40%);
+            }
+            25% {
+                background: 
+                    radial-gradient(ellipse at 65% 30%, rgba(255, 70, 160, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 25% 50%, rgba(70, 160, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 75% 70%, rgba(255, 160, 70, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 40% 15%, rgba(70, 255, 180, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 50% 85%, rgba(180, 70, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 30% 60%, rgba(120, 255, 120, 0.3), transparent 40%);
+            }
+            50% {
+                background: 
+                    radial-gradient(ellipse at 80% 50%, rgba(255, 70, 160, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 35% 25%, rgba(70, 160, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 60% 80%, rgba(255, 160, 70, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 70% 35%, rgba(70, 255, 180, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 25% 65%, rgba(180, 70, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 50% 45%, rgba(120, 255, 120, 0.3), transparent 40%);
+            }
+            75% {
+                background: 
+                    radial-gradient(ellipse at 40% 65%, rgba(255, 70, 160, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 60% 35%, rgba(70, 160, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 30% 25%, rgba(255, 160, 70, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 75% 75%, rgba(70, 255, 180, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 55% 45%, rgba(180, 70, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 45% 70%, rgba(120, 255, 120, 0.3), transparent 40%);
+            }
+            100% {
+                background: 
+                    radial-gradient(ellipse at 30% 20%, rgba(255, 70, 160, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 70% 40%, rgba(70, 160, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 50% 60%, rgba(255, 160, 70, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 20% 80%, rgba(70, 255, 180, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 80% 70%, rgba(180, 70, 255, 0.3), transparent 40%),
+                    radial-gradient(ellipse at 55% 90%, rgba(120, 255, 120, 0.3), transparent 40%);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,220,255,0.3));
+            border-radius: 50%;
+            pointer-events: none;
+            animation: drift 8s infinite ease-in-out;
+            opacity: 0.6;
+            box-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+            50% { transform: translate(30px, -40px) scale(1.5); opacity: 0.8; }
+        }
+
+        .floating-capsule {
+            position: fixed;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(135deg, rgba(255,220,255,0.4), rgba(220,240,255,0.4));
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.6);
+            backdrop-filter: blur(8px);
+            pointer-events: none;
+            animation: float 12s infinite ease-in-out;
+            box-shadow: 0 4px 16px rgba(255,200,255,0.3), inset 0 1px 2px rgba(255,255,255,0.5);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -30px) rotate(5deg); }
+            50% { transform: translate(-10px, -50px) rotate(-3deg); }
+            75% { transform: translate(15px, -20px) rotate(4deg); }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 120px 0 80px;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(ellipse at 30% 40%, rgba(255, 70, 160, 0.7), transparent 50%),
+                radial-gradient(ellipse at 70% 30%, rgba(70, 160, 255, 0.7), transparent 50%),
+                radial-gradient(ellipse at 50% 60%, rgba(255, 160, 70, 0.7), transparent 50%),
+                radial-gradient(ellipse at 20% 70%, rgba(70, 255, 180, 0.7), transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(180, 70, 255, 0.7), transparent 50%);
+            opacity: 0.6;
+            filter: blur(70px);
+            animation: sparklingGlow 2.5s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes sparklingGlow {
+            0%, 100% { 
+                filter: blur(70px) brightness(1.4) saturate(1.6) contrast(1.1);
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                filter: blur(60px) brightness(1.7) saturate(1.9) contrast(1.15);
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        @keyframes dreamyPulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        header > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 110px;
+            font-weight: 600;
+            letter-spacing: 8px;
+            color: #5a3d8f;
+            margin-bottom: 32px;
+            animation: logoInnerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes logoInnerGlow {
+            0%, 100% {
+                color: #5a3d8f;
+                filter: brightness(1) contrast(1);
+            }
+            50% {
+                color: #8a6fcf;
+                filter: brightness(1.3) contrast(1.1);
+            }
+        }
+
+        .tagline {
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 48px;
+            color: #2d5f3f;
+            animation: taglineSparkle 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(45, 95, 63, 0.4));
+        }
+
+        @keyframes taglineSparkle {
+            0%, 100% { 
+                filter: drop-shadow(0 0 12px rgba(45, 95, 63, 0.4)) brightness(1.1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 20px rgba(45, 95, 63, 0.6)) brightness(1.2);
+            }
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 20px rgba(255,200,255,0.4)); }
+            50% { filter: brightness(1.2) drop-shadow(0 0 30px rgba(255,200,255,0.6)); }
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(200, 180, 255, 0.2), 0 2px 8px rgba(255, 255, 255, 0.8) inset;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 80px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2d8a45;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(200, 200, 220, 0.4);
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #4a4a5e;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #d8a8ff;
+            box-shadow: 0 0 0 3px rgba(216, 168, 255, 0.2), 0 4px 12px rgba(200, 180, 255, 0.3);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff9ed8, #d8a8ff);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 158, 216, 0.4);
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 158, 216, 0.6), 0 0 30px rgba(216, 168, 255, 0.5);
+            animation: pulseGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 8px 24px rgba(255, 158, 216, 0.6), 0 0 30px rgba(216, 168, 255, 0.5); }
+            50% { box-shadow: 0 8px 32px rgba(255, 158, 216, 0.8), 0 0 40px rgba(216, 168, 255, 0.7); }
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 24px rgba(200, 180, 255, 0.15), 0 1px 4px rgba(255, 255, 255, 0.6) inset;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        h2 {
+            font-size: 32px;
+            font-weight: 300;
+            color: #1a2f4a;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 400;
+            color: #1a2f4a;
+            margin: 32px 0 16px;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 17px;
+            color: #1a2f4a;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .capsule-types {
+            margin: 32px 0;
+        }
+
+        .capsule-type {
+            background: linear-gradient(135deg, rgba(255, 240, 255, 0.8), rgba(240, 248, 255, 0.8));
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 12px rgba(200, 180, 255, 0.15);
+        }
+
+        .founder-section {
+            background: linear-gradient(135deg, rgba(255, 248, 255, 0.8), rgba(248, 255, 255, 0.8));
+        }
+
+        .founder-signature {
+            font-style: italic;
+            color: #1a2f4a;
+            margin-top: 24px;
+            font-size: 18px;
+        }
+
+        .footer-garden {
+            text-align: center;
+            padding: 80px 0 60px;
+            position: relative;
+        }
+
+        .footer-capsules {
+            position: relative;
+            height: 120px;
+            margin-bottom: 40px;
+        }
+
+        .footer-capsule {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: linear-gradient(135deg, rgba(255,220,255,0.5), rgba(220,240,255,0.5));
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.7);
+            backdrop-filter: blur(8px);
+            animation: floatFooter 8s infinite ease-in-out;
+            box-shadow: 0 4px 20px rgba(255,200,255,0.4), inset 0 1px 3px rgba(255,255,255,0.6);
+        }
+
+        .footer-capsule:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .footer-capsule:nth-child(2) { left: 30%; animation-delay: 1s; }
+        .footer-capsule:nth-child(3) { left: 50%; animation-delay: 2s; }
+        .footer-capsule:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+
+        @keyframes floatFooter {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        .footer-cta {
+            font-size: 48px;
+            font-weight: 500;
+            color: #ff6b3d;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ff6b3d, #ffb83d, #ff8c3d);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: footerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes footerGlow {
+            0%, 100% {
+                filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 107, 61, 0.6));
+            }
+            50% {
+                filter: brightness(1.5) drop-shadow(0 0 40px rgba(255, 184, 61, 0.9));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 64px; letter-spacing: 10px; }
+            .tagline { font-size: 24px; letter-spacing: 1.5px; }
+            .section { padding: 32px 24px; }
+            h2 { font-size: 26px; }
+            h3 { font-size: 20px; }
+            .form-container { padding: 32px 24px; }
+            .footer-capsule { width: 60px; height: 30px; }
+        }
+
+        .confirmation {
+            display: none;
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, rgba(216, 255, 216, 0.8), rgba(216, 240, 255, 0.8));
+            border-radius: 16px;
+            animation: fadeInGlow 0.8s ease-out;
+        }
+
+        @keyframes fadeInGlow {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .confirmation h3 {
+            color: #4a7a5e;
+            margin: 0 0 12px;
+        }
+
+        .confirmation p {
+            color: #5a8a6e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="sparkle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="top: 30%; left: 80%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="top: 60%; left: 15%; animation-delay: 4s;"></div>
+    <div class="sparkle" style="top: 80%; left: 70%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="top: 20%; left: 50%; animation-delay: 3s;"></div>
+    <div class="sparkle" style="top: 50%; left: 90%; animation-delay: 5s;"></div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header>
+            <h1 class="logo">HATCHI</h1>
+            <p class="tagline">A new ritual for digital connection.</p>
+            <div style="margin: 40px auto 0; text-align: center;">
+                <img src="https://i.ibb.co/wZMH9Str/alexstlee-glowing-magical-egg-orb-art-bright-pastel-color-wit-0e82bdbe-76cb-40c9-ab32-no-BG.png" 
+                     alt="Hatchi Capsule" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                     style="width: 700px; height: auto; display: block; margin: 0 auto; animation: float 6s ease-in-out infinite; max-width: 90%;">
+                <div style="display: none; width: 300px; height: 380px; margin: 0 auto; background: linear-gradient(135deg, #80ff80 0%, #a0ff90 20%, #c0ffa0 40%, #90ffa8 60%, #70ff88 80%, #80ff80 100%); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; animation: float 6s ease-in-out infinite; box-shadow: 0 30px 80px rgba(128, 255, 128, 0.5), inset 0 -30px 60px rgba(255, 255, 255, 0.2); position: relative; filter: blur(0.5px) brightness(1.1);">
+                    <span style="position: absolute; bottom: 100px; left: 50%; transform: translateX(-50%); color: #2d8a45; font-size: 38px; font-weight: 500; letter-spacing: 3px; text-shadow: 0 2px 8px rgba(45, 138, 69, 0.4);">Hatchi</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 1: What is Hatchi? -->
+        <section class="section">
+            <h2>What is Hatchi?</h2>
+            <p>Hatchi is not just another messaging app, it is a digital experience that transforms communication into a moment of wonder. At its core, Hatchi is a time capsule messaging app that allows people to send messages contained in capsules that do not appear instantly, but instead "hatch" at chosen times. It is a place where moments don't just get sent—they hatch.</p>
+            <p>In doing so, Hatchi introduces a new emotional category: anticipatory communication. It transforms ordinary messages into capsules of anticipation, love, play and magic, creating a sense of future wonder rather than instant consumption.</p>
+            <p>In a world of instant everything, Hatchi slows down the pace. It asks people to wait, to anticipate, to savor the unfolding of words as though they were opening a gift.</p>
+            <p>At its heart, Hatchi is an experiment in wonder. It reimagines technology not as cold efficiency but as a playful companion that sparks joy, inspires wonder, strengthens bonds and spreads love.</p>
+        </section>
+
+
+
+        <!-- Section 3: Why Hatchi Exists -->
+        <section class="section">
+            <h2>Why Hatchi Exists</h2>
+            <p>In a digital world that is over saturated and strangely hollow, Hatchi creates space for anticipation, wonder, warmth, meaningful connection and love. By transforming a simple text into a "capsule" that hatches with time, Hatchi makes people feel their conversations again.</p>
+            
+            <div style="margin: 40px auto 0; text-align: center;">
+                <img src="https://i.ibb.co/1fBtcKBv/enchanted-egg-shaped-capsule-mid-teleportation-magi-c2b0de8-no-bg.png" 
+                     alt="Hatchi Capsule" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                     style="width: 400px; height: auto; display: block; margin: 0 auto; animation: float 6s ease-in-out infinite 1s; max-width: 90%;">
+                <div style="display: none; width: 320px; height: 400px; margin: 0 auto; background: linear-gradient(135deg, #a8e8ff 0%, #d0b8ff 25%, #ffb8e8 50%, #ffd8b8 75%, #b8ffd8 100%); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; animation: float 6s ease-in-out infinite 1s; box-shadow: 0 30px 80px rgba(168, 232, 255, 0.4), inset 0 -30px 60px rgba(255, 255, 255, 0.25); position: relative; filter: blur(0.5px) brightness(1.15);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Waitlist Form -->
+        <div class="form-container">
+            <form id="waitlistForm">
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                
+                <div class="input-group">
+                    <label for="why">Why do you want Hatchi? (Optional)</label>
+                    <textarea id="why" name="why" placeholder="Share what draws you to this space..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Join Waitlist</button>
+            </form>
+            
+            <div class="confirmation" id="confirmation">
+                <h3>✨ Welcome to the Garden</h3>
+                <p>Your capsule has been sealed. We'll reach out when Hatchi begins to hatch.</p>
+            </div>
+        </div>
+
+        <!-- Third Capsule -->
+        <div style="margin: 60px auto 20px; text-align: center;">
+            <img src="https://i.ibb.co/B56DgV4q/egg-capsule-rainbow-3.png" 
+                 alt="Hatchi Capsule" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                 style="width: 550px; height: auto; display: block; margin: 0 auto; animation: float 6s ease-in-out infinite 2s; max-width: 90%;">
+            <div style="display: none; width: 320px; height: 400px; margin: 0 auto; background: linear-gradient(135deg, #ffa8d8 0%, #ffb8a8 20%, #ffffa8 40%, #a8ffb8 60%, #a8d8ff 80%, #d8a8ff 100%); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; animation: float 6s ease-in-out infinite 2s; box-shadow: 0 30px 80px rgba(255, 168, 216, 0.4), inset 0 -30px 60px rgba(255, 255, 255, 0.25); position: relative; filter: blur(0.5px) brightness(1.15);">
+            </div>
+        </div>
+
+        <!-- Section 4: Founder Section -->
+        <section class="section founder-section">
+            <h2>From the Founder</h2>
+            <p>Hi, I'm Alex, the founder of Hatchi.</p>
+            <p>Most of our digital spaces today feel loud, rushed, and built for performance. But the moments that actually stay with us — the ones that change us — are the quiet ones we share with someone who matters.</p>
+            <p>Hatchi was born from a simple question: What if technology didn't demand our attention… but invited us to slow down? In a world where everything is fast, loud, reactive, even forgettable, what if waiting itself could become meaningful?</p>
+            <p>With Hatchi, every message feels like a gift. A message sealed now, meant to be revealed later. It is a way to connect and feel through anticipation and wonder, to hold a moment for someone you care about, to create a small piece of magic in a world that rarely pauses.</p>
+            <p>We are building a calmer, cozier and intentional space for people who believe in the magic of waiting. This is an experiment in a new gentle form of connection. If this resonates with you, welcome. I'd love for you to join us from the very beginning.</p>
+            <p>Hatchi is just starting to hatch. I hope you'll be part of its first light.</p>
+            <p class="founder-signature">— Alex</p>
+        </section>
+
+        <!-- Footer Garden -->
+        <footer class="footer-garden">
+            <p class="footer-cta">Join the first light.</p>
+            <p style="font-size: 14px; color: #ff6bb5; margin-top: 40px;">@Hatchi</p>
+        </footer>
+    </div>
+
+    <script>
+        // Form submission handling
+        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Hide form, show confirmation
+            document.getElementById('waitlistForm').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+            
+            // Here you would typically send the data to your backend
+            // For now, we'll just log it
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                why: document.getElementById('why').value
+            };
+            console.log('Waitlist submission:', formData);
+        });
+
+        // Add more sparkles dynamically
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(sparkle);
+        }
+
+        // Create additional sparkles
+        for (let i = 0; i < 15; i++) {
+            createSparkle();
+        }
+    </script>
+</body>
+</html>
